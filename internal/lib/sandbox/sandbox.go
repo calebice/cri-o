@@ -393,3 +393,13 @@ func (s *Sandbox) UnmountShm() error {
 
 	return nil
 }
+
+// SetCreated sets the created status of sandbox to true
+func (s *Sandbox) SetCreated() {
+	s.created = true
+}
+
+// Created returns the created status of sandbox
+func (s *Sandbox) Created() bool {
+	return s.created
+}

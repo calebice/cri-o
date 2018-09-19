@@ -342,3 +342,13 @@ func (c *Container) StdinOnce() bool {
 func (c *Container) exitFilePath() string {
 	return filepath.Join(c.dir, "exit")
 }
+
+// SetCreated sets the created flag to true once container is created
+func (c *Container) SetCreated() {
+	c.created = true
+}
+
+// Created returns whether the container was created successfully
+func (c *Container) Created() bool {
+	return c.created
+}
