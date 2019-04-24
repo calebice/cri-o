@@ -160,7 +160,6 @@ func (s *Server) restore(ctx context.Context) {
 			continue
 		}
 		names[containers[i].ID] = containers[i].Names
-
 		if metadata.Pod {
 			pods[containers[i].ID] = &metadata
 		} else {
@@ -197,7 +196,6 @@ func (s *Server) restore(ctx context.Context) {
 					// Release the container name for future use
 					s.ReleaseContainerName(n)
 				}
-
 			}
 		}
 		// Add the pod id to the list of deletedPods so we don't try to restore IPs for it later on
@@ -208,7 +206,6 @@ func (s *Server) restore(ctx context.Context) {
 	// release the name associated with you.
 	for containerID := range podContainers {
 		if err := s.LoadContainer(containerID); err != nil {
-<<<<<<< HEAD
 			// containers of other runtimes should not be deleted
 			if err == lib.ErrIsNonCrioContainer {
 				logrus.Infof("ignoring non CRI-O container %s", containerID)
@@ -221,11 +218,6 @@ func (s *Server) restore(ctx context.Context) {
 					// Release the container name
 					s.ReleaseContainerName(n)
 				}
-=======
-			logrus.Warnf("could not restore container %s: %v", containerID, err)
-			for _, n := range names[containerID] {
-				s.Store().DeleteContainer(n)
->>>>>>> server: delete the container if it cannot be restored
 			}
 		}
 	}
